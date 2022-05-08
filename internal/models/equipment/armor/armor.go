@@ -1,7 +1,7 @@
 package armor
 
 import (
-	"github.com/koodeex/pathgogen/core"
+	"github.com/koodeex/pathgogen/internal/core"
 )
 
 type Category string

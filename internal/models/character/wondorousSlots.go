@@ -1,6 +1,8 @@
 package character
 
-import "github.com/koodeex/pathgogen/models/items"
+import (
+	"github.com/koodeex/pathgogen/internal/models/items"
+)
 
 type WondrousSlots struct {
 	Head      *items.WondrousItem

@@ -1,6 +1,8 @@
 package feats
 
-import "github.com/koodeex/pathgogen/models/prerequisites"
+import (
+	"github.com/koodeex/pathgogen/internal/models/prerequisites"
+)
 
 type Feat struct {
 	Name          string

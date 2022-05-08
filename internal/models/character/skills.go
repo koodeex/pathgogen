@@ -2,12 +2,11 @@ package character
 
 import (
 	"fmt"
-
-	"github.com/koodeex/pathgogen/core"
-	c "github.com/koodeex/pathgogen/models/class"
-	f "github.com/koodeex/pathgogen/models/feats"
-	r "github.com/koodeex/pathgogen/models/races"
-	t "github.com/koodeex/pathgogen/models/traits"
+	"github.com/koodeex/pathgogen/internal/core"
+	c "github.com/koodeex/pathgogen/internal/models/class"
+	"github.com/koodeex/pathgogen/internal/models/feats"
+	r "github.com/koodeex/pathgogen/internal/models/races"
+	t "github.com/koodeex/pathgogen/internal/models/traits"
 )
 
 type Skill struct {
@@ -267,74 +266,74 @@ func getClassSkillBonus(classes []c.Class, skill *Skill) int {
 	return 0
 }
 
-func getFeatBonus(charFeats []*f.Feat, skill *Skill) int {
+func getFeatBonus(charFeats []*feats.Feat, skill *Skill) int {
 	var featBonus int
 	skillName := skill.Name
 	for _, feat := range charFeats {
 		switch feat.Name {
-		case f.Acrobatic:
+		case feats.Acrobatic:
 			if skillName == AcrobaticsName || skillName == FlyName {
 				featBonus += 2
 			}
-		case f.Alertness:
+		case feats.Alertness:
 			if skillName == PerceptionName || skillName == SenseMotiveName {
 				featBonus += 2
 			}
-		case f.AnimalAffinity:
+		case feats.AnimalAffinity:
 			if skillName == HandleAnimalName || skillName == RideName {
 				featBonus += 2
 			}
-		case f.Athletic:
+		case feats.Athletic:
 			if skillName == ClimbName || skillName == SwimName {
 				featBonus += 2
 			}
-		case f.BreadthofExperience:
+		case feats.BreadthofExperience:
 			if isKnowledgeSkill(skillName) || skillName == ProfessionName {
 				featBonus += 2
 			}
-		case f.Deceitful:
+		case feats.Deceitful:
 			if skillName == BluffName || skillName == DisguiseName {
 				featBonus += 2
 			}
-		case f.ExoticHeritage:
+		case feats.ExoticHeritage:
 			if core.IsStringInTheArray(skillName, feat.Extra) {
 				featBonus += 2
 			}
-		case f.MagicalAptitude:
+		case feats.MagicalAptitude:
 			if skillName == SpellcraftName || skillName == UseMagicDeviceName {
 				featBonus += 2
 			}
-		case f.MasterAlchemist:
+		case feats.MasterAlchemist:
 			if skillName == CraftName && string(Alchemy) == skill.Special {
 				featBonus += 2
 			}
-		case f.Persuasive:
+		case feats.Persuasive:
 			if skillName == DiplomacyName || skillName == IntimidateName {
 				featBonus += 2
 			}
-		case f.Prodigy:
+		case feats.Prodigy:
 			if (skillName == CraftName || skillName == ProfessionName || skillName == PerformName) && (core.IsStringInTheArray(skill.Special, feat.Extra)) {
 				featBonus += 2
 				if skill.Ranks >= 10 {
 					featBonus += 2
 				}
 			}
-		case f.SelfSufficient:
+		case feats.SelfSufficient:
 			if skillName == HealName || skillName == SurvivalName {
 				featBonus += 2
 			}
-		case f.SharpSenses:
+		case feats.SharpSenses:
 			if skillName == PerceptionName {
 				featBonus += 4
 			}
-		case f.SkillFocus:
+		case feats.SkillFocus:
 			if core.IsStringInTheArray(skillName, feat.Extra) {
 				featBonus += 3
 				if skill.Ranks >= 10 {
 					featBonus += 3
 				}
 			}
-		case f.Stealthy:
+		case feats.Stealthy:
 			if skillName == EscapeArtistName || skillName == StealthName {
 				featBonus += 2
 			}

@@ -1,12 +1,11 @@
 package class
 
 import (
+	"github.com/koodeex/pathgogen/internal/core"
+	a "github.com/koodeex/pathgogen/internal/models/equipment/armor"
+	w "github.com/koodeex/pathgogen/internal/models/equipment/weapon"
+	"github.com/koodeex/pathgogen/internal/models/feats"
 	"math"
-
-	"github.com/koodeex/pathgogen/core"
-	a "github.com/koodeex/pathgogen/models/equipment/armor"
-	w "github.com/koodeex/pathgogen/models/equipment/weapon"
-	"github.com/koodeex/pathgogen/models/feats"
 )
 
 type Class interface {

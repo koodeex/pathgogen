@@ -1,8 +1,8 @@
 package character
 
 import (
-	"github.com/koodeex/pathgogen/core"
-	"github.com/koodeex/pathgogen/models/feats"
+	"github.com/koodeex/pathgogen/internal/core"
+	"github.com/koodeex/pathgogen/internal/models/feats"
 	"math"
 )
 

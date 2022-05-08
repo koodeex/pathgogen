@@ -3,16 +3,15 @@ package character
 import (
 	"errors"
 	"fmt"
-	"github.com/koodeex/pathgogen/models/prerequisites"
-
-	"github.com/koodeex/pathgogen/core"
-	c "github.com/koodeex/pathgogen/models/class"
-	a "github.com/koodeex/pathgogen/models/equipment/armor"
-	w "github.com/koodeex/pathgogen/models/equipment/weapon"
-	f "github.com/koodeex/pathgogen/models/feats"
-	i "github.com/koodeex/pathgogen/models/items"
-	r "github.com/koodeex/pathgogen/models/races"
-	t "github.com/koodeex/pathgogen/models/traits"
+	"github.com/koodeex/pathgogen/internal/core"
+	"github.com/koodeex/pathgogen/internal/models/class"
+	"github.com/koodeex/pathgogen/internal/models/equipment/armor"
+	w "github.com/koodeex/pathgogen/internal/models/equipment/weapon"
+	"github.com/koodeex/pathgogen/internal/models/feats"
+	i "github.com/koodeex/pathgogen/internal/models/items"
+	"github.com/koodeex/pathgogen/internal/models/prerequisites"
+	r "github.com/koodeex/pathgogen/internal/models/races"
+	t "github.com/koodeex/pathgogen/internal/models/traits"
 )
 
 type Character struct {
@@ -22,22 +21,22 @@ type Character struct {
 	HD        int
 	Name      string
 	Race      *r.Race
-	Alignment c.Alignment
+	Alignment class.Alignment
 
 	EquippedWeapon *w.Weapon
-	EquippedArmor  *a.Armor
-	EquippedShield *a.Shield
+	EquippedArmor  *armor.Armor
+	EquippedShield *armor.Shield
 
 	Inventory     []*i.Item
 	WondrousItems *WondrousSlots
 
-	Classes []c.Class
-	Feats   []*f.Feat
+	Classes []class.Class
+	Feats   []*feats.Feat
 	Traits  []*t.Trait
 }
 
 // NewCharacter ...
-func NewCharacter(name string, alignment c.Alignment, hd int, traits []*t.Trait, race *r.Race, favoredClass c.Class, str, dex, con, int, wis, cha int) *Character {
+func NewCharacter(name string, alignment class.Alignment, hd int, traits []*t.Trait, race *r.Race, favoredClass class.Class, str, dex, con, int, wis, cha int) *Character {
 	abilities := newCharacterAbilities(Ability(str), Ability(dex), Ability(con), Ability(int), Ability(wis), Ability(cha))
 	skills := newCharacterSkills(&abilities.Str, &abilities.Dex, &abilities.Int, &abilities.Wis, &abilities.Cha)
 
@@ -49,8 +48,8 @@ func NewCharacter(name string, alignment c.Alignment, hd int, traits []*t.Trait,
 		characterSkills:    skills,
 		characterAbilities: abilities,
 		Traits:             traits,
-		Feats:              []*f.Feat{},
-		Classes:            []c.Class{favoredClass},
+		Feats:              []*feats.Feat{},
+		Classes:            []class.Class{favoredClass},
 		WondrousItems:      &WondrousSlots{},
 		Inventory:          []*i.Item{},
 	}
@@ -164,18 +163,18 @@ func (c *Character) GetWillSave() *SaveBonus {
 
 // AddFeat ...
 // TODO: multi feats fix
-func (c *Character) AddFeat(newFeat *f.Feat) error {
+func (c *Character) AddFeat(newFeat *feats.Feat) error {
 	for _, p := range newFeat.Prerequisites {
 		if !c.VerifyPrerequisite(p) {
 			return errors.New(fmt.Sprintf("Do not meet feat prerequisite (%s:%+v): %s", p.Key, p.Value, newFeat.Name))
 		}
 	}
 	if core.IsStringInTheArray(newFeat.Name, []string{
-		f.SkillFocus,
-		f.ExoticHeritage,
-		f.WeaponFocus,
-		f.WeaponSpecialization,
-		f.ArcaneTalent,
+		feats.SkillFocus,
+		feats.ExoticHeritage,
+		feats.WeaponFocus,
+		feats.WeaponSpecialization,
+		feats.ArcaneTalent,
 	}) {
 		for _, feat := range c.Feats {
 			if feat.Name == newFeat.Name {
@@ -188,7 +187,7 @@ func (c *Character) AddFeat(newFeat *f.Feat) error {
 }
 
 // RemoveFeat ...
-func (c *Character) RemoveFeat(featToRemove *f.Feat) {
+func (c *Character) RemoveFeat(featToRemove *feats.Feat) {
 	for idx, feat := range c.Feats {
 		if featToRemove.Name == feat.Name {
 			c.Feats = append(c.Feats[:idx], c.Feats[idx+1:]...)

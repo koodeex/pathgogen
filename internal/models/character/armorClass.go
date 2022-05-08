@@ -1,10 +1,9 @@
 package character
 
 import (
+	armor2 "github.com/koodeex/pathgogen/internal/models/equipment/armor"
+	"github.com/koodeex/pathgogen/internal/models/feats"
 	"strings"
-
-	"github.com/koodeex/pathgogen/models/equipment/armor"
-	"github.com/koodeex/pathgogen/models/feats"
 )
 
 const baseAC = 10
@@ -56,7 +55,7 @@ func (a *ArmorClassBonus) GetTouch() int {
 	return a.Touch
 }
 
-func getACAbilityModifier(ability int, armor *armor.Armor, shield *armor.Shield) int {
+func getACAbilityModifier(ability int, armor *armor2.Armor, shield *armor2.Shield) int {
 	var maxDexBonus int
 	if armor != nil {
 		maxDexBonus = armor.MaximumDexBonus
