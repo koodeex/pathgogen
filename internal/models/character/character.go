@@ -55,6 +55,21 @@ func NewCharacter(name string, alignment class.Alignment, hd int, traits []*t.Tr
 	}
 }
 
+// GetDamage ...
+func (c *Character) GetDamage() *DamageBonus {
+	var dice = &core.Dice{
+		Multiple: 1,
+		Dice:     core.D3,
+	}
+
+	if c.EquippedWeapon != nil {
+		dice = c.EquippedWeapon.DmgM
+	}
+	abilityBonus := getDamageAbilityBonus(c)
+	miscBonus := getDamageMiscBonus(c)
+	return NewDamageBonus(dice, abilityBonus, miscBonus)
+}
+
 // GetAttack ...
 func (c *Character) GetAttack() []*AttackBonus {
 	ability := getAttackAbilityBonus(c)

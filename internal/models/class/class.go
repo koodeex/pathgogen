@@ -104,7 +104,7 @@ func (c *class) FilterWeapon(weapons ...w.Weapon) []w.Weapon {
 
 func (c *class) VerifyWeapon(weapon w.Weapon) bool {
 	for _, proficiency := range c.WeaponProficiency {
-		if weapon.Type == proficiency {
+		if weapon.Category == proficiency {
 			return true
 		}
 	}

@@ -12,6 +12,14 @@ const (
 	Exotic  Category = "exotic"
 )
 
+type Type string
+
+const (
+	OneHanded Type = "One-Handed"
+	TwoHanded Type = "Two-Handed"
+	Ranged    Type = "Ranged"
+)
+
 type DamageType string
 
 const (
@@ -22,7 +30,8 @@ const (
 
 type Weapon struct {
 	Name       string
-	Type       Category
+	Category   Category
+	Type       Type
 	DmgS       *core.Dice
 	DmgM       *core.Dice
 	Critical   *core.CriticalRange
