@@ -3,11 +3,11 @@ package character
 import (
 	"fmt"
 
-	"pathgogen/core"
-	c "pathgogen/models/class"
-	f "pathgogen/models/feats"
-	r "pathgogen/models/races"
-	t "pathgogen/models/traits"
+	"github.com/koodeex/pathgogen/core"
+	c "github.com/koodeex/pathgogen/models/class"
+	f "github.com/koodeex/pathgogen/models/feats"
+	r "github.com/koodeex/pathgogen/models/races"
+	t "github.com/koodeex/pathgogen/models/traits"
 )
 
 type Skill struct {

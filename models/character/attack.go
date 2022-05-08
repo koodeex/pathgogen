@@ -1,9 +1,9 @@
 package character
 
 import (
+	"github.com/koodeex/pathgogen/core"
+	"github.com/koodeex/pathgogen/models/feats"
 	"math"
-	"pathgogen/core"
-	"pathgogen/models/feats"
 )
 
 type AttackBonus struct {

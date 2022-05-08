@@ -3,8 +3,8 @@ package character
 import (
 	"strings"
 
-	"pathgogen/models/equipment/armor"
-	"pathgogen/models/feats"
+	"github.com/koodeex/pathgogen/models/equipment/armor"
+	"github.com/koodeex/pathgogen/models/feats"
 )
 
 const baseAC = 10

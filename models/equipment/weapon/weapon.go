@@ -1,7 +1,7 @@
 package weapon
 
 import (
-	"pathgogen/core"
+	"github.com/koodeex/pathgogen/core"
 )
 
 type Category string

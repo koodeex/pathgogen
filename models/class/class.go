@@ -3,10 +3,10 @@ package class
 import (
 	"math"
 
-	"pathgogen/core"
-	a "pathgogen/models/equipment/armor"
-	w "pathgogen/models/equipment/weapon"
-	"pathgogen/models/feats"
+	"github.com/koodeex/pathgogen/core"
+	a "github.com/koodeex/pathgogen/models/equipment/armor"
+	w "github.com/koodeex/pathgogen/models/equipment/weapon"
+	"github.com/koodeex/pathgogen/models/feats"
 )
 
 type Class interface {

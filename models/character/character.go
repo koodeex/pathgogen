@@ -3,16 +3,16 @@ package character
 import (
 	"errors"
 	"fmt"
-	"pathgogen/models/prerequisites"
+	"github.com/koodeex/pathgogen/models/prerequisites"
 
-	"pathgogen/core"
-	c "pathgogen/models/class"
-	a "pathgogen/models/equipment/armor"
-	w "pathgogen/models/equipment/weapon"
-	f "pathgogen/models/feats"
-	i "pathgogen/models/items"
-	r "pathgogen/models/races"
-	t "pathgogen/models/traits"
+	"github.com/koodeex/pathgogen/core"
+	c "github.com/koodeex/pathgogen/models/class"
+	a "github.com/koodeex/pathgogen/models/equipment/armor"
+	w "github.com/koodeex/pathgogen/models/equipment/weapon"
+	f "github.com/koodeex/pathgogen/models/feats"
+	i "github.com/koodeex/pathgogen/models/items"
+	r "github.com/koodeex/pathgogen/models/races"
+	t "github.com/koodeex/pathgogen/models/traits"
 )
 
 type Character struct {

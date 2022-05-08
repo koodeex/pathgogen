@@ -1,9 +1,9 @@
 package class
 
 import (
-	"pathgogen/models/equipment/armor"
-	"pathgogen/models/equipment/weapon"
-	"pathgogen/models/feats"
+	"github.com/koodeex/pathgogen/models/equipment/armor"
+	"github.com/koodeex/pathgogen/models/equipment/weapon"
+	"github.com/koodeex/pathgogen/models/feats"
 )
 
 var barbarianClassSkills = []string{

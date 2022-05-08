@@ -1,6 +1,6 @@
 package feats
 
-import "pathgogen/models/prerequisites"
+import "github.com/koodeex/pathgogen/models/prerequisites"
 
 type AbilityType string
 
