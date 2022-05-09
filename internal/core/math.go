@@ -38,3 +38,9 @@ type CriticalRange struct {
 	Minimal  int
 	Maximum  int
 }
+
+const (
+	LowBAB    float64 = 0.5
+	MediumBAB float64 = 0.75
+	HighBAB   float64 = 1.0
+)

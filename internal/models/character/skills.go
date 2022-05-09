@@ -6,6 +6,7 @@ import (
 	c "github.com/koodeex/pathgogen/internal/models/class"
 	"github.com/koodeex/pathgogen/internal/models/feats"
 	r "github.com/koodeex/pathgogen/internal/models/races"
+	"github.com/koodeex/pathgogen/internal/models/skills"
 	t "github.com/koodeex/pathgogen/internal/models/traits"
 )
 
@@ -85,44 +86,6 @@ const (
 	SurvivalLink       string = "https://www.d20pfsrd.com/skills/survival"
 	SwimLink           string = "https://www.d20pfsrd.com/skills/swim"
 	UseMagicDeviceLink string = "https://www.d20pfsrd.com/skills/use-magic-device"
-)
-
-const (
-	AcrobaticsName             string = "Acrobatics"
-	AppraiseName               string = "Appraise"
-	BluffName                  string = "Bluff"
-	ClimbName                  string = "Climb"
-	CraftName                  string = "Craft"
-	DiplomacyName              string = "Diplomacy"
-	DisableDeviceName          string = "DisableDevice"
-	DisguiseName               string = "Disguise"
-	EscapeArtistName           string = "EscapeArtist"
-	FlyName                    string = "Fly"
-	HandleAnimalName           string = "HandleAnimal"
-	HealName                   string = "Heal"
-	IntimidateName             string = "Intimidate"
-	KnowledgeArcanaName        string = "KnowledgeArcana"
-	KnowledgeDungeoneeringName string = "KnowledgeDungeoneering"
-	KnowledgeEngineeringName   string = "KnowledgeEngineering"
-	KnowledgeGeographyName     string = "KnowledgeGeography"
-	KnowledgeHistoryName       string = "KnowledgeHistory"
-	KnowledgeLocalName         string = "KnowledgeLocal"
-	KnowledgeNatureName        string = "KnowledgeNature"
-	KnowledgeNobilityName      string = "KnowledgeNobility"
-	KnowledgePlanesName        string = "KnowledgePlanes"
-	KnowledgeReligionName      string = "KnowledgeReligion"
-	LinguisticsName            string = "Linguistics"
-	PerceptionName             string = "Perception"
-	PerformName                string = "Perform"
-	ProfessionName             string = "Profession"
-	RideName                   string = "Ride"
-	SenseMotiveName            string = "SenseMotive"
-	SleightOfHandName          string = "SleightOfHand"
-	SpellcraftName             string = "Spellcraft"
-	StealthName                string = "Stealth"
-	SurvivalName               string = "Survival"
-	SwimName                   string = "Swim"
-	UseMagicDeviceName         string = "UseMagicDevice"
 )
 
 type characterSkills struct {
@@ -272,27 +235,27 @@ func getFeatBonus(charFeats []*feats.Feat, skill *Skill) int {
 	for _, feat := range charFeats {
 		switch feat.Name {
 		case feats.Acrobatic:
-			if skillName == AcrobaticsName || skillName == FlyName {
+			if skillName == skills.AcrobaticsName || skillName == skills.FlyName {
 				featBonus += 2
 			}
 		case feats.Alertness:
-			if skillName == PerceptionName || skillName == SenseMotiveName {
+			if skillName == skills.PerceptionName || skillName == skills.SenseMotiveName {
 				featBonus += 2
 			}
 		case feats.AnimalAffinity:
-			if skillName == HandleAnimalName || skillName == RideName {
+			if skillName == skills.HandleAnimalName || skillName == skills.RideName {
 				featBonus += 2
 			}
 		case feats.Athletic:
-			if skillName == ClimbName || skillName == SwimName {
+			if skillName == skills.ClimbName || skillName == skills.SwimName {
 				featBonus += 2
 			}
 		case feats.BreadthofExperience:
-			if isKnowledgeSkill(skillName) || skillName == ProfessionName {
+			if isKnowledgeSkill(skillName) || skillName == skills.ProfessionName {
 				featBonus += 2
 			}
 		case feats.Deceitful:
-			if skillName == BluffName || skillName == DisguiseName {
+			if skillName == skills.BluffName || skillName == skills.DisguiseName {
 				featBonus += 2
 			}
 		case feats.ExoticHeritage:
@@ -300,30 +263,30 @@ func getFeatBonus(charFeats []*feats.Feat, skill *Skill) int {
 				featBonus += 2
 			}
 		case feats.MagicalAptitude:
-			if skillName == SpellcraftName || skillName == UseMagicDeviceName {
+			if skillName == skills.SpellcraftName || skillName == skills.UseMagicDeviceName {
 				featBonus += 2
 			}
 		case feats.MasterAlchemist:
-			if skillName == CraftName && string(Alchemy) == skill.Special {
+			if skillName == skills.CraftName && string(Alchemy) == skill.Special {
 				featBonus += 2
 			}
 		case feats.Persuasive:
-			if skillName == DiplomacyName || skillName == IntimidateName {
+			if skillName == skills.DiplomacyName || skillName == skills.IntimidateName {
 				featBonus += 2
 			}
 		case feats.Prodigy:
-			if (skillName == CraftName || skillName == ProfessionName || skillName == PerformName) && (core.IsStringInTheArray(skill.Special, feat.Extra)) {
+			if (skillName == skills.CraftName || skillName == skills.ProfessionName || skillName == skills.PerformName) && (core.IsStringInTheArray(skill.Special, feat.Extra)) {
 				featBonus += 2
 				if skill.Ranks >= 10 {
 					featBonus += 2
 				}
 			}
 		case feats.SelfSufficient:
-			if skillName == HealName || skillName == SurvivalName {
+			if skillName == skills.HealName || skillName == skills.SurvivalName {
 				featBonus += 2
 			}
 		case feats.SharpSenses:
-			if skillName == PerceptionName {
+			if skillName == skills.PerceptionName {
 				featBonus += 4
 			}
 		case feats.SkillFocus:
@@ -334,7 +297,7 @@ func getFeatBonus(charFeats []*feats.Feat, skill *Skill) int {
 				}
 			}
 		case feats.Stealthy:
-			if skillName == EscapeArtistName || skillName == StealthName {
+			if skillName == skills.EscapeArtistName || skillName == skills.StealthName {
 				featBonus += 2
 			}
 		}
@@ -358,13 +321,13 @@ func getClassFeatureBonus(class c.Class, skill *Skill) int {
 }
 
 func isKnowledgeSkill(skillName string) bool {
-	return skillName == KnowledgeDungeoneeringName ||
-		skillName == KnowledgeEngineeringName ||
-		skillName == KnowledgeGeographyName ||
-		skillName == KnowledgeHistoryName ||
-		skillName == KnowledgeLocalName ||
-		skillName == KnowledgeNatureName ||
-		skillName == KnowledgeNobilityName ||
-		skillName == KnowledgePlanesName ||
-		skillName == KnowledgeReligionName
+	return skillName == skills.KnowledgeDungeoneeringName ||
+		skillName == skills.KnowledgeEngineeringName ||
+		skillName == skills.KnowledgeGeographyName ||
+		skillName == skills.KnowledgeHistoryName ||
+		skillName == skills.KnowledgeLocalName ||
+		skillName == skills.KnowledgeNatureName ||
+		skillName == skills.KnowledgeNobilityName ||
+		skillName == skills.KnowledgePlanesName ||
+		skillName == skills.KnowledgeReligionName
 }

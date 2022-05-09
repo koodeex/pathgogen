@@ -11,6 +11,7 @@ import (
 	i "github.com/koodeex/pathgogen/internal/models/items"
 	"github.com/koodeex/pathgogen/internal/models/prerequisites"
 	r "github.com/koodeex/pathgogen/internal/models/races"
+	"github.com/koodeex/pathgogen/internal/models/skills"
 	t "github.com/koodeex/pathgogen/internal/models/traits"
 )
 
@@ -224,47 +225,47 @@ func (c *Character) GetBAB() int {
 func (c *Character) GetSkills() map[string]*SkillBonus {
 	result := make(map[string]*SkillBonus)
 
-	result[AcrobaticsName] = NewSkillBonus(getSkill(c, c.Acrobatics))
-	result[AppraiseName] = NewSkillBonus(getSkill(c, c.Appraise))
-	result[BluffName] = NewSkillBonus(getSkill(c, c.Bluff))
-	result[ClimbName] = NewSkillBonus(getSkill(c, c.Climb))
+	result[skills.AcrobaticsName] = NewSkillBonus(getSkill(c, c.Acrobatics))
+	result[skills.AppraiseName] = NewSkillBonus(getSkill(c, c.Appraise))
+	result[skills.BluffName] = NewSkillBonus(getSkill(c, c.Bluff))
+	result[skills.ClimbName] = NewSkillBonus(getSkill(c, c.Climb))
 	for _, craft := range c.Craft {
-		result[fmt.Sprintf("%s (%s)", CraftName, craft.Special)] = NewSkillBonus(getSkill(c, craft))
+		result[fmt.Sprintf("%s (%s)", skills.CraftName, craft.Special)] = NewSkillBonus(getSkill(c, craft))
 	}
-	result[DiplomacyName] = NewSkillBonus(getSkill(c, c.Diplomacy))
-	result[DisableDeviceName] = NewSkillBonus(getSkill(c, c.DisableDevice))
-	result[DisguiseName] = NewSkillBonus(getSkill(c, c.Disguise))
-	result[EscapeArtistName] = NewSkillBonus(getSkill(c, c.EscapeArtist))
-	result[FlyName] = NewSkillBonus(getSkill(c, c.Fly))
-	result[HandleAnimalName] = NewSkillBonus(getSkill(c, c.HandleAnimal))
-	result[HealName] = NewSkillBonus(getSkill(c, c.Heal))
-	result[IntimidateName] = NewSkillBonus(getSkill(c, c.Intimidate))
-	result[KnowledgeArcanaName] = NewSkillBonus(getSkill(c, c.KnowledgeArcana))
-	result[KnowledgeDungeoneeringName] = NewSkillBonus(getSkill(c, c.KnowledgeDungeoneering))
-	result[KnowledgeEngineeringName] = NewSkillBonus(getSkill(c, c.KnowledgeEngineering))
-	result[KnowledgeGeographyName] = NewSkillBonus(getSkill(c, c.KnowledgeGeography))
-	result[KnowledgeHistoryName] = NewSkillBonus(getSkill(c, c.KnowledgeHistory))
-	result[KnowledgeLocalName] = NewSkillBonus(getSkill(c, c.KnowledgeLocal))
-	result[KnowledgeNatureName] = NewSkillBonus(getSkill(c, c.KnowledgeNature))
-	result[KnowledgeNobilityName] = NewSkillBonus(getSkill(c, c.KnowledgeNobility))
-	result[KnowledgePlanesName] = NewSkillBonus(getSkill(c, c.KnowledgePlanes))
-	result[KnowledgeReligionName] = NewSkillBonus(getSkill(c, c.KnowledgeReligion))
-	result[LinguisticsName] = NewSkillBonus(getSkill(c, c.Linguistics))
-	result[PerceptionName] = NewSkillBonus(getSkill(c, c.Perception))
+	result[skills.DiplomacyName] = NewSkillBonus(getSkill(c, c.Diplomacy))
+	result[skills.DisableDeviceName] = NewSkillBonus(getSkill(c, c.DisableDevice))
+	result[skills.DisguiseName] = NewSkillBonus(getSkill(c, c.Disguise))
+	result[skills.EscapeArtistName] = NewSkillBonus(getSkill(c, c.EscapeArtist))
+	result[skills.FlyName] = NewSkillBonus(getSkill(c, c.Fly))
+	result[skills.HandleAnimalName] = NewSkillBonus(getSkill(c, c.HandleAnimal))
+	result[skills.HealName] = NewSkillBonus(getSkill(c, c.Heal))
+	result[skills.IntimidateName] = NewSkillBonus(getSkill(c, c.Intimidate))
+	result[skills.KnowledgeArcanaName] = NewSkillBonus(getSkill(c, c.KnowledgeArcana))
+	result[skills.KnowledgeDungeoneeringName] = NewSkillBonus(getSkill(c, c.KnowledgeDungeoneering))
+	result[skills.KnowledgeEngineeringName] = NewSkillBonus(getSkill(c, c.KnowledgeEngineering))
+	result[skills.KnowledgeGeographyName] = NewSkillBonus(getSkill(c, c.KnowledgeGeography))
+	result[skills.KnowledgeHistoryName] = NewSkillBonus(getSkill(c, c.KnowledgeHistory))
+	result[skills.KnowledgeLocalName] = NewSkillBonus(getSkill(c, c.KnowledgeLocal))
+	result[skills.KnowledgeNatureName] = NewSkillBonus(getSkill(c, c.KnowledgeNature))
+	result[skills.KnowledgeNobilityName] = NewSkillBonus(getSkill(c, c.KnowledgeNobility))
+	result[skills.KnowledgePlanesName] = NewSkillBonus(getSkill(c, c.KnowledgePlanes))
+	result[skills.KnowledgeReligionName] = NewSkillBonus(getSkill(c, c.KnowledgeReligion))
+	result[skills.LinguisticsName] = NewSkillBonus(getSkill(c, c.Linguistics))
+	result[skills.PerceptionName] = NewSkillBonus(getSkill(c, c.Perception))
 	for _, perform := range c.Perform {
-		result[fmt.Sprintf("%s (%s)", CraftName, perform.Special)] = NewSkillBonus(getSkill(c, perform))
+		result[fmt.Sprintf("%s (%s)", skills.CraftName, perform.Special)] = NewSkillBonus(getSkill(c, perform))
 	}
 	for _, profession := range c.Profession {
-		result[fmt.Sprintf("%s (%s)", CraftName, profession.Special)] = NewSkillBonus(getSkill(c, profession))
+		result[fmt.Sprintf("%s (%s)", skills.CraftName, profession.Special)] = NewSkillBonus(getSkill(c, profession))
 	}
-	result[RideName] = NewSkillBonus(getSkill(c, c.Ride))
-	result[SenseMotiveName] = NewSkillBonus(getSkill(c, c.SenseMotive))
-	result[SleightOfHandName] = NewSkillBonus(getSkill(c, c.SleightOfHand))
-	result[SpellcraftName] = NewSkillBonus(getSkill(c, c.Spellcraft))
-	result[StealthName] = NewSkillBonus(getSkill(c, c.Stealth))
-	result[SurvivalName] = NewSkillBonus(getSkill(c, c.Survival))
-	result[SwimName] = NewSkillBonus(getSkill(c, c.Swim))
-	result[UseMagicDeviceName] = NewSkillBonus(getSkill(c, c.UseMagicDevice))
+	result[skills.RideName] = NewSkillBonus(getSkill(c, c.Ride))
+	result[skills.SenseMotiveName] = NewSkillBonus(getSkill(c, c.SenseMotive))
+	result[skills.SleightOfHandName] = NewSkillBonus(getSkill(c, c.SleightOfHand))
+	result[skills.SpellcraftName] = NewSkillBonus(getSkill(c, c.Spellcraft))
+	result[skills.StealthName] = NewSkillBonus(getSkill(c, c.Stealth))
+	result[skills.SurvivalName] = NewSkillBonus(getSkill(c, c.Survival))
+	result[skills.SwimName] = NewSkillBonus(getSkill(c, c.Swim))
+	result[skills.UseMagicDeviceName] = NewSkillBonus(getSkill(c, c.UseMagicDevice))
 
 	return result
 }

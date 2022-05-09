@@ -6,10 +6,20 @@ import (
 
 type Category string
 
+// Weapon proficiency by group
 const (
 	Simple  Category = "simple"
 	Martial Category = "martial"
 	Exotic  Category = "exotic"
+)
+
+// Weapon proficiency by weapon
+const (
+	ClubProficiency          Category = "Club"
+	DaggerProficiency        Category = "Dagger"
+	HeavyCrossbowProficiency Category = "Heavy Crossbow"
+	LightCrossbowProficiency Category = "Light Crossbow"
+	QuarterstaffProficiency  Category = "Quarterstaff"
 )
 
 type Type string

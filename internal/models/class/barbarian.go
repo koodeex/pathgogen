@@ -1,63 +1,71 @@
 package class
 
 import (
+	"github.com/koodeex/pathgogen/internal/core"
 	"github.com/koodeex/pathgogen/internal/models/equipment/armor"
 	"github.com/koodeex/pathgogen/internal/models/equipment/weapon"
 	"github.com/koodeex/pathgogen/internal/models/feats"
+	"github.com/koodeex/pathgogen/internal/models/skills"
 )
 
-var barbarianClassSkills = []string{
-	"Acrobatics",
-	"Climb",
-	"Craft",
-	"Handle Animal",
-	"Intimidate",
-	"Knowledge (nature)",
-	"Perception",
-	"Ride",
-	"Survival",
-	"Swim",
+var barbarianClassSkillList = []string{
+	skills.AcrobaticsName,
+	skills.ClimbName,
+	skills.CraftName,
+	skills.HandleAnimalName,
+	skills.IntimidateName,
+	skills.KnowledgeNatureName,
+	skills.PerceptionName,
+	skills.RideName,
+	skills.SurvivalName,
+	skills.SwimName,
 }
 
 type Barbarian struct {
-	class
+	*class
 }
 
 func NewBarbarianClass(level int, isFavored bool) *Barbarian {
 	var classSkills []string
-	classSkills = append(classSkills, barbarianClassSkills...)
-	return &Barbarian{class{
-		Name:        "Barbarian",
-		Description: "For some, there is only rage. In the ways of their people, in the fury of their passion, in the howl of battle, conflict is all these brutal souls know. Savages, hired muscle, masters of vicious martial techniques, they are not soldiers or professional warriors—they are the battle possessed, creatures of slaughter and spirits of war. Known as barbarians, these warmongers know little of training, preparation, or the rules of warfare; for them, only the moment exists, with the foes that stand before them and the knowledge that the next moment might hold their death. They possess a sixth sense in regard to danger and the endurance to weather all that might entail. These brutal warriors might rise from all walks of life, both civilized and savage, though whole societies embracing such philosophies roam the wild places of the world. Within barbarians storms the primal spirit of battle, and woe to those who face their rage.",
-		Role:        "Barbarians excel in combat, possessing the martial prowess and fortitude to take on foes seemingly far superior to themselves. With rage granting them boldness and daring beyond that of most other warriors, barbarians charge furiously into battle and ruin all who would stand in their way.",
-		AlignmentAllowed: []Alignment{
-			ChaoticEvil,
-			ChaoticGood,
-			ChaoticNeutral,
-			NeutralEvil,
-			Neutral,
-			NeutralGood,
-		},
-		BAB:   1,
-		Level: level,
-		WeaponProficiency: []weapon.Category{
-			weapon.Simple,
-			weapon.Martial,
-		},
-		ArmorProficiency: []armor.Category{
-			armor.Light,
-			armor.Medium,
-		},
-		ClassFeatures: InitBarbarianFeatures(),
-		ClassSkills:   classSkills,
-		FortBaseSave:  true,
-		RefBaseSave:   false,
-		WillBaseSave:  false,
-		IsFavored:     isFavored,
-	}}
+	classSkills = append(classSkills, barbarianClassSkillList...)
+	return &Barbarian{
+		&class{
+			Name:        "Barbarian",
+			Description: "For some, there is only rage. In the ways of their people, in the fury of their passion, in the howl of battle, conflict is all these brutal souls know. Savages, hired muscle, masters of vicious martial techniques, they are not soldiers or professional warriors—they are the battle possessed, creatures of slaughter and spirits of war. Known as barbarians, these warmongers know little of training, preparation, or the rules of warfare; for them, only the moment exists, with the foes that stand before them and the knowledge that the next moment might hold their death. They possess a sixth sense in regard to danger and the endurance to weather all that might entail. These brutal warriors might rise from all walks of life, both civilized and savage, though whole societies embracing such philosophies roam the wild places of the world. Within barbarians storms the primal spirit of battle, and woe to those who face their rage.",
+			Role:        "Barbarians excel in combat, possessing the martial prowess and fortitude to take on foes seemingly far superior to themselves. With rage granting them boldness and daring beyond that of most other warriors, barbarians charge furiously into battle and ruin all who would stand in their way.",
+			AlignmentAllowed: []Alignment{
+				ChaoticEvil,
+				ChaoticGood,
+				ChaoticNeutral,
+				NeutralEvil,
+				Neutral,
+				NeutralGood,
+			},
+			HD: &core.Dice{
+				Multiple: 1,
+				Dice:     core.D12,
+			},
+			BAB:   core.HighBAB,
+			Level: level,
+			WeaponProficiency: []weapon.Category{
+				weapon.Simple,
+				weapon.Martial,
+			},
+			ArmorProficiency: []armor.Category{
+				armor.Light,
+				armor.Medium,
+			},
+			SkillRanksPerLevel: 4,
+			ClassFeatures:      initBarbarianFeatures(),
+			ClassSkills:        classSkills,
+			FortBaseSave:       true,
+			RefBaseSave:        false,
+			WillBaseSave:       false,
+			IsFavored:          isFavored,
+		}}
 }
 
-func InitBarbarianFeatures() []*feats.ClassFeature {
+func initBarbarianFeatures() []*feats.ClassFeature {
 	return []*feats.ClassFeature{
 		{
 			Name:          "Fast Movement",

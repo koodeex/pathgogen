@@ -15,7 +15,7 @@ type Class interface {
 	GetDescription() string
 	GetRole() string
 	GetSkillRanksPerLevel() int
-	GetHD() core.Dice
+	GetHD() *core.Dice
 	GetAverageHP() int
 	GetStartingWealth() string
 	GetLevel() int
@@ -38,7 +38,7 @@ type class struct {
 	Role               string
 	AlignmentAllowed   []Alignment
 	SkillRanksPerLevel int
-	HD                 core.Dice
+	HD                 *core.Dice
 	StartingWealth     string
 	BAB                float64
 	Level              int
@@ -76,7 +76,7 @@ func (c *class) GetSkillRanksPerLevel() int {
 	return c.SkillRanksPerLevel
 }
 
-func (c *class) GetHD() core.Dice {
+func (c *class) GetHD() *core.Dice {
 	return c.HD
 }
 
@@ -104,7 +104,7 @@ func (c *class) FilterWeapon(weapons ...w.Weapon) []w.Weapon {
 
 func (c *class) VerifyWeapon(weapon w.Weapon) bool {
 	for _, proficiency := range c.WeaponProficiency {
-		if weapon.Category == proficiency {
+		if weapon.Category == proficiency || weapon.Name == string(proficiency) {
 			return true
 		}
 	}
