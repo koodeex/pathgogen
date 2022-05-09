@@ -17,6 +17,9 @@ const (
 	TraitPrerequisites         PrerequisiteType = "Trait"
 	MultiplePrerequisites      PrerequisiteType = "MultiPrerequisite"
 	ClassFeaturesPrerequisites PrerequisiteType = "ClassFeature"
+	CasterLevelPrerequisite    PrerequisiteType = "CasterLevel"
+
+	WizardLevelPrerequisite PrerequisiteType = "Wizard"
 
 	AcrobaticsPrerequisite             PrerequisiteType = "Acrobatics"
 	AppraisePrerequisite               PrerequisiteType = "Appraise"
@@ -53,6 +56,9 @@ const (
 	SurvivalPrerequisite               PrerequisiteType = "Survival"
 	SwimPrerequisite                   PrerequisiteType = "Swim"
 	UseMagicDevicePrerequisite         PrerequisiteType = "UseMagicDevice"
+
+	ArcaneBondPrerequisite PrerequisiteType = "Arcane Bond"
+	FamiliarPrerequisite   PrerequisiteType = "Familiar"
 )
 
 type Prerequisite struct {

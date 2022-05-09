@@ -3,11 +3,14 @@ package character
 import (
 	"errors"
 	"fmt"
+	"strings"
+
 	"github.com/koodeex/pathgogen/internal/core"
 	"github.com/koodeex/pathgogen/internal/models/class"
 	"github.com/koodeex/pathgogen/internal/models/equipment/armor"
 	w "github.com/koodeex/pathgogen/internal/models/equipment/weapon"
 	"github.com/koodeex/pathgogen/internal/models/feats"
+	"github.com/koodeex/pathgogen/internal/models/feats/arcaneBond"
 	i "github.com/koodeex/pathgogen/internal/models/items"
 	"github.com/koodeex/pathgogen/internal/models/prerequisites"
 	r "github.com/koodeex/pathgogen/internal/models/races"
@@ -180,9 +183,11 @@ func (c *Character) GetWillSave() *SaveBonus {
 // AddFeat ...
 // TODO: multi feats fix
 func (c *Character) AddFeat(newFeat *feats.Feat) error {
-	for _, p := range newFeat.Prerequisites {
-		if !c.VerifyPrerequisite(p) {
-			return errors.New(fmt.Sprintf("Do not meet feat prerequisite (%s:%+v): %s", p.Key, p.Value, newFeat.Name))
+	if newFeat.Prerequisites != nil {
+		for _, p := range newFeat.Prerequisites {
+			if !c.VerifyPrerequisite(p) {
+				return errors.New(fmt.Sprintf("Do not meet feat prerequisite (%s:%+v): %s", p.Key, p.Value, newFeat.Name))
+			}
 		}
 	}
 	if core.IsStringInTheArray(newFeat.Name, []string{
@@ -470,6 +475,20 @@ func (c *Character) VerifyPrerequisite(prerequisite *prerequisites.Prerequisite)
 	case prerequisites.UseMagicDevicePrerequisite:
 		if c.UseMagicDevice.Ranks == prerequisite.Value.(int) {
 			return true
+		}
+	case prerequisites.CasterLevelPrerequisite:
+		for _, class := range c.Classes {
+			if class.IsCaster() && class.GetLevel() >= prerequisite.Value.(int) {
+				return true
+			}
+		}
+	case prerequisites.ArcaneBondPrerequisite:
+		for _, class := range c.Classes {
+			for _, feature := range class.GetClassFeatures() {
+				if strings.Contains(feature.Name, string(prerequisites.ArcaneBondPrerequisite)) && feature.Special.(arcaneBond.ArcaneBond).Type == prerequisite.Value.(arcaneBond.ArcaneBondType) {
+					return true
+				}
+			}
 		}
 	}
 

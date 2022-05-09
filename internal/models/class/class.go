@@ -30,6 +30,7 @@ type Class interface {
 	GetFortSave() int
 	GetRefSave() int
 	GetWillSave() int
+	IsCaster() bool
 }
 
 type class struct {
@@ -50,6 +51,11 @@ type class struct {
 	RefBaseSave        bool
 	WillBaseSave       bool
 	IsFavored          bool
+	Casting            *CastSlots
+}
+
+func (c *class) IsCaster() bool {
+	return c.Casting != nil
 }
 
 func (c *class) LevelUp() {

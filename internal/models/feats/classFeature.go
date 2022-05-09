@@ -1,9 +1,5 @@
 package feats
 
-import (
-	"github.com/koodeex/pathgogen/internal/models/prerequisites"
-)
-
 type AbilityType string
 
 const (
@@ -20,10 +16,4 @@ type ClassFeature struct {
 	Link          string
 	LevelRequired int
 	Special       interface{}
-}
-
-type RagePower struct {
-	Name          string
-	Benefit       string
-	Prerequisites []*prerequisites.Prerequisite
 }
