@@ -15,7 +15,11 @@ type CastSlots struct {
 // GetSlots ...
 func (s *CastSlots) GetSlots(level int, castStatBonus int) map[int]int {
 	result := make(map[int]int)
-	for circle, slots := range s.baseSlots[level] {
+	for circle, slots := range s.baseSlots[level-1] {
+		if circle == 0 {
+			result[circle] = slots
+			continue
+		}
 		result[circle] = slots + castStatBonus
 	}
 	return result

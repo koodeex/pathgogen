@@ -59,6 +59,24 @@ func NewCharacter(name string, alignment class.Alignment, hd int, traits []*t.Tr
 	}
 }
 
+// GetCasterClasses ...
+func (c *Character) GetCasterClasses() []class.Class {
+	var classes []class.Class
+	for _, class := range c.Classes {
+		if class.IsCaster() {
+			classes = append(classes, class)
+		}
+	}
+	return classes
+}
+
+// GetInitiative ...
+func (c *Character) GetInitiative() *InitiativeBonus {
+	abilityBonus := getInitiativeAbilityBonus(c)
+	miscBonus := getInitiativeMiscBonus(c)
+	return NewInitiativeBonus(abilityBonus, miscBonus)
+}
+
 // GetDamage ...
 func (c *Character) GetDamage() *DamageBonus {
 	var dice = &core.Dice{

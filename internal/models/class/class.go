@@ -31,6 +31,7 @@ type Class interface {
 	GetRefSave() int
 	GetWillSave() int
 	IsCaster() bool
+	GetCastSlots() *CastSlots
 }
 
 type class struct {
@@ -56,6 +57,11 @@ type class struct {
 
 func (c *class) IsCaster() bool {
 	return c.Casting != nil
+}
+
+// GetCastSlots ...
+func (c *class) GetCastSlots() *CastSlots {
+	return c.Casting
 }
 
 func (c *class) LevelUp() {
